@@ -190,7 +190,7 @@ public class Matrix {
     private static int[][] inputMatriks(int baris, int kolom, String namaMatriks, Scanner scanner) {
         int[][] matriks = new int[baris][kolom];
         System.out.println("Masukkan elemen-elemen matriks " + namaMatriks + ":");
-        for (int i = 0; j < baris; i++) {
+        for (int i = 0; i < baris; i++) {
             for (int j = 0; j < kolom; j++) {
                 System.out.print("Masukkan elemen pada posisi (" + (i + 1) + "," + (j + 1) + "): ");
                 matriks[i][j] = scanner.nextInt();
