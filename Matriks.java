@@ -3,11 +3,22 @@ import java.util.Scanner;
 public class Matriks {
 
     private int[][] resultMatrix;
+    private double determinantResult;
 
     // Constructor for matrix operations
     public Matriks(int[][] matrix1, int[][] matrix2) {
         displayMenu();
         performOperation(matrix1, matrix2);
+    }
+
+    // Constructor to calculate transpose
+    public Matriks(int[][] matrix) {
+        calculateTranspose(matrix);
+    }
+
+    // Constructor to calculate determinant
+    public Matriks(int[][] matrix, boolean isDeterminant) {
+        calculateDeterminant(matrix);
     }
 
     // Display the menu
@@ -17,7 +28,9 @@ public class Matriks {
         System.out.println("2. Subtraction");
         System.out.println("3. Multiplication");
         System.out.println("4. Division");
-        System.out.print("Choose an operation (1-4): ");
+        System.out.println("5. Transpose");
+        System.out.println("6. Determinant");
+        System.out.print("Choose an operation (1-6): ");
     }
 
     // Perform the selected matrix operation
@@ -38,8 +51,14 @@ public class Matriks {
             case 4:
                 performDivision(matrix1, matrix2);
                 break;
+            case 5:
+                calculateTranspose(matrix1);
+                break;
+            case 6:
+                calculateDeterminant(matrix1);
+                break;
             default:
-                System.out.println("Invalid choice. Please choose a number between 1 and 4.");
+                System.out.println("Invalid choice. Please choose a number between 1 and 6.");
         }
 
         scanner.close();
@@ -97,8 +116,64 @@ public class Matriks {
 
     // Perform division
     private void performDivision(int[][] matrix1, int[][] matrix2) {
-        System.out.println("Sorry, there is no thing called Matrix Division.");
+        System.out.println("Matrix division is not supported in this version.");
         // You can implement matrix division logic if needed
+    }
+
+    // Calculate transpose
+    private void calculateTranspose(int[][] matrix) {
+        resultMatrix = new int[matrix[0].length][matrix.length];
+        for (int i = 0; i < matrix.length; i++) {
+            for (int j = 0; j < matrix[0].length; j++) {
+                resultMatrix[j][i] = matrix[i][j];
+            }
+        }
+        System.out.println("Result of Transpose:");
+        printMatrix(resultMatrix);
+    }
+
+    // Calculate determinant
+    private void calculateDeterminant(int[][] matrix) {
+        if (matrix.length == matrix[0].length) {
+            determinantResult = calculateDeterminantRecursive(matrix);
+            System.out.println("Determinant: " + determinantResult);
+        } else {
+            System.out.println("Matrix must be square to calculate determinant.");
+        }
+    }
+
+    // Recursive method to calculate determinant
+    private double calculateDeterminantRecursive(int[][] matrix) {
+        int n = matrix.length;
+        double determinant = 0;
+
+        if (n == 1) {
+            determinant = matrix[0][0];
+        } else if (n == 2) {
+            determinant = (matrix[0][0] * matrix[1][1]) - (matrix[0][1] * matrix[1][0]);
+        } else {
+            for (int i = 0; i < n; i++) {
+                int[][] submatrix = createSubmatrix(matrix, i);
+                determinant += Math.pow(-1, i) * matrix[0][i] * calculateDeterminantRecursive(submatrix);
+            }
+        }
+
+        return determinant;
+    }
+
+    // Create submatrix for determinant calculation
+    private int[][] createSubmatrix(int[][] matrix, int col) {
+        int n = matrix.length;
+        int[][] submatrix = new int[n - 1][n - 1];
+        for (int i = 1; i < n; i++) {
+            int subCol = 0;
+            for (int j = 0; j < n; j++) {
+                if (j != col) {
+                    submatrix[i - 1][subCol++] = matrix[i][j];
+                }
+            }
+        }
+        return submatrix;
     }
 
     // Method to print a matrix
@@ -114,7 +189,7 @@ public class Matriks {
     // Method to input elements for a matrix
     private static int[][] inputMatrix(int rows, int cols, String matrixName, Scanner scanner) {
         int[][] matrix = new int[rows][cols];
-        System.out.println("Enter the elements for the " + matrixName + " matrix:");
+        System.out.println("Enter elements for matrix " + matrixName + ":");
         for (int i = 0; i < rows; i++) {
             for (int j = 0; j < cols; j++) {
                 System.out.print("Enter element at position (" + (i + 1) + "," + (j + 1) + "): ");
@@ -142,8 +217,16 @@ public class Matriks {
         int cols2 = scanner.nextInt();
         int[][] matrix2 = inputMatrix(rows2, cols2, "second", scanner);
 
-        // Create a Matriks object with the input matrices
+        // Creating a Matriks object with the input matrices
         new Matriks(matrix1, matrix2);
+
+        // Creating a Matriks object to calculate the transpose
+        System.out.println("\nCalculating Transpose of the First Matrix:");
+        new Matriks(matrix1);
+
+        // Creating a Matriks object to calculate the determinant
+        System.out.println("\nCalculating Determinant of the First Matrix:");
+        new Matriks(matrix1, true);
 
         scanner.close();
     }
