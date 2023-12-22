@@ -32,7 +32,7 @@ public class Matrix {
         System.out.println("6. Determinan");
         System.out.print("Pilih operasi (1-6): ");
     }
-    //ahahahaha coba kita push
+    
     // Melakukan operasi matriks yang dipilih
     private void performOperation(int[][] matriks1, int[][] matriks2) {
         Scanner scanner = new Scanner(System.in);
