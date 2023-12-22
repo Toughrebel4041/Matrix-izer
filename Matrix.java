@@ -2,232 +2,232 @@ import java.util.Scanner;
 
 public class Matrix {
 
-    private int[][] resultMatrix;
-    private double determinantResult;
+    private int[][] matrixHasil;
+    private double determinanResult;
 
-    // Constructor for matrix operations
-    public Matrix(int[][] matrix1, int[][] matrix2) {
-        displayMenu();  // Memanggil metode untuk menampilkan menu operasi matriks
-        performOperation(matrix1, matrix2);  // Memanggil metode untuk melakukan operasi matriks
+    // Konstruktor untuk operasi matriks
+    public Matrix(int[][] matriks1, int[][] matriks2) {
+        displayMenu();
+        performOperation(matriks1, matriks2);
     }
 
-    // Constructor to calculate transpose
-    public Matrix(int[][] matrix) {
-        calculateTranspose(matrix);  // Memanggil metode untuk menghitung transpose
+    // Konstruktor untuk menghitung transpose
+    public Matrix(int[][] matriks) {
+        calculateTranspose(matriks);
     }
 
-    // Constructor to calculate determinant
-    public Matrix(int[][] matrix, boolean isDeterminant) {
-        calculateDeterminant(matrix);  // Memanggil metode untuk menghitung determinan
+    // Konstruktor untuk menghitung determinan
+    public Matrix(int[][] matriks, boolean isDeterminant) {
+        calculateDeterminant(matriks);
     }
 
-    // Display the menu
+    // Menampilkan menu
     private void displayMenu() {
-        System.out.println("Matrix Calculator Menu:");  // Menampilkan judul menu
-        System.out.println("1. Addition");  // Menampilkan pilihan operasi penjumlahan
-        System.out.println("2. Subtraction");  // Menampilkan pilihan operasi pengurangan
-        System.out.println("3. Multiplication");  // Menampilkan pilihan operasi perkalian
-        System.out.println("4. Division");  // Menampilkan pilihan operasi pembagian
-        System.out.println("5. Transpose");  // Menampilkan pilihan operasi transpose
-        System.out.println("6. Determinant");  // Menampilkan pilihan operasi determinan
-        System.out.print("Choose an operation (1-6): ");  // Meminta pengguna untuk memilih operasi
+        System.out.println("Menu Kalkulator Matriks:");
+        System.out.println("1. Penjumlahan");
+        System.out.println("2. Pengurangan");
+        System.out.println("3. Perkalian");
+        System.out.println("4. Pembagian");
+        System.out.println("5. Transpose");
+        System.out.println("6. Determinan");
+        System.out.print("Pilih operasi (1-6): ");
     }
 
-    // Perform the selected matrix operation
-    private void performOperation(int[][] matrix1, int[][] matrix2) {
-        Scanner scanner = new Scanner(System.in);  // Membuat objek Scanner untuk input dari pengguna
-        int choice = scanner.nextInt();  // Membaca pilihan operasi dari pengguna
+    // Melakukan operasi matriks yang dipilih
+    private void performOperation(int[][] matriks1, int[][] matriks2) {
+        Scanner scanner = new Scanner(System.in);
+        int choice = scanner.nextInt();
 
         switch (choice) {
             case 1:
-                performAddition(matrix1, matrix2);  // Memanggil metode untuk penjumlahan matriks
+                performAddition(matriks1, matriks2);
                 break;
             case 2:
-                performSubtraction(matrix1, matrix2);  // Memanggil metode untuk pengurangan matriks
+                performSubtraction(matriks1, matriks2);
                 break;
             case 3:
-                performMultiplication(matrix1, matrix2);  // Memanggil metode untuk perkalian matriks
+                performMultiplication(matriks1, matriks2);
                 break;
             case 4:
-                performDivision(matrix1, matrix2);  // Memanggil metode untuk pembagian matriks
+                performDivision(matriks1, matriks2);
                 break;
             case 5:
-                calculateTranspose(matrix1);  // Memanggil metode untuk menghitung transpose matriks
+                calculateTranspose(matriks1);
                 break;
             case 6:
-                calculateDeterminant(matrix1);  // Memanggil metode untuk menghitung determinan matriks
+                calculateDeterminant(matriks1);
                 break;
             default:
-                System.out.println("Invalid choice. Please choose a number between 1 and 6.");  // Menampilkan pesan jika pilihan tidak valid
+                System.out.println("Pilihan tidak valid. Silakan pilih angka antara 1 dan 6.");
         }
 
-        scanner.close();  // Menutup objek Scanner
+        scanner.close();
     }
 
-    // Perform addition
-    private void performAddition(int[][] matrix1, int[][] matrix2) {
-        if (matrix1.length == matrix2.length && matrix1[0].length == matrix2[0].length) {
-            resultMatrix = new int[matrix1.length][matrix1[0].length];  // Membuat matriks hasil penjumlahan
-            for (int i = 0; i < matrix1.length; i++) {
-                for (int j = 0; j < matrix1[0].length; j++) {
-                    resultMatrix[i][j] = matrix1[i][j] + matrix2[i][j];  // Menjumlahkan elemen-elemen matriks
+    // Melakukan penjumlahan
+    private void performAddition(int[][] matriks1, int[][] matriks2) {
+        if (matriks1.length == matriks2.length && matriks1[0].length == matriks2[0].length) {
+            matrixHasil = new int[matriks1.length][matriks1[0].length];
+            for (int i = 0; i < matriks1.length; i++) {
+                for (int j = 0; j < matriks1[0].length; j++) {
+                    matrixHasil[i][j] = matriks1[i][j] + matriks2[i][j];
                 }
             }
-            System.out.println("Result of Addition:");  // Menampilkan hasil penjumlahan matriks
-            printMatrix(resultMatrix);  // Memanggil metode untuk menampilkan matriks
+            System.out.println("Hasil Penjumlahan:");
+            displayMatrix(matrixHasil);
         } else {
-            System.out.println("Matrices must have the same dimensions for addition.");  // Menampilkan pesan jika dimensi matriks tidak sesuai
+            System.out.println("Matriks harus memiliki dimensi yang sama untuk penjumlahan.");
         }
     }
 
-    // Perform subtraction
-    private void performSubtraction(int[][] matrix1, int[][] matrix2) {
-        if (matrix1.length == matrix2.length && matrix1[0].length == matrix2[0].length) {
-            resultMatrix = new int[matrix1.length][matrix1[0].length];  // Membuat matriks hasil pengurangan
-            for (int i = 0; i < matrix1.length; i++) {
-                for (int j = 0; j < matrix1[0].length; j++) {
-                    resultMatrix[i][j] = matrix1[i][j] - matrix2[i][j];  // Mengurangkan elemen-elemen matriks
+    // Melakukan pengurangan
+    private void performSubtraction(int[][] matriks1, int[][] matriks2) {
+        if (matriks1.length == matriks2.length && matriks1[0].length == matriks2[0].length) {
+            matrixHasil = new int[matriks1.length][matriks1[0].length];
+            for (int i = 0; i < matriks1.length; i++) {
+                for (int j = 0; j < matriks1[0].length; j++) {
+                    matrixHasil[i][j] = matriks1[i][j] - matriks2[i][j];
                 }
             }
-            System.out.println("Result of Subtraction:");  // Menampilkan hasil pengurangan matriks
-            printMatrix(resultMatrix);  // Memanggil metode untuk menampilkan matriks
+            System.out.println("Hasil Pengurangan:");
+            displayMatrix(matrixHasil);
         } else {
-            System.out.println("Matrices must have the same dimensions for subtraction.");  // Menampilkan pesan jika dimensi matriks tidak sesuai
+            System.out.println("Matriks harus memiliki dimensi yang sama untuk pengurangan.");
         }
     }
 
-    // Perform multiplication
-    private void performMultiplication(int[][] matrix1, int[][] matrix2) {
-        if (matrix1[0].length == matrix2.length) {
-            resultMatrix = new int[matrix1.length][matrix2[0].length];  // Membuat matriks hasil perkalian
-            for (int i = 0; i < matrix1.length; i++) {
-                for (int j = 0; j < matrix2[0].length; j++) {
-                    for (int k = 0; k < matrix1[0].length; k++) {
-                        resultMatrix[i][j] += matrix1[i][k] * matrix2[k][j];  // Mengalikan dan menjumlahkan elemen-elemen matriks
+    // Melakukan perkalian
+    private void performMultiplication(int[][] matriks1, int[][] matriks2) {
+        if (matriks1[0].length == matriks2.length) {
+            matrixHasil = new int[matriks1.length][matriks2[0].length];
+            for (int i = 0; i < matriks1.length; i++) {
+                for (int j = 0; j < matriks2[0].length; j++) {
+                    for (int k = 0; k < matriks1[0].length; k++) {
+                        matrixHasil[i][j] += matriks1[i][k] * matriks2[k][j];
                     }
                 }
             }
-            System.out.println("Result of Multiplication:");  // Menampilkan hasil perkalian matriks
-            printMatrix(resultMatrix);  // Memanggil metode untuk menampilkan matriks
+            System.out.println("Hasil Perkalian:");
+            displayMatrix(matrixHasil);
         } else {
-            System.out.println("Invalid dimensions for multiplication.");  // Menampilkan pesan jika dimensi matriks tidak sesuai
+            System.out.println("Dimensi yang tidak valid untuk perkalian.");
         }
     }
 
-    // Perform division
-    private void performDivision(int[][] matrix1, int[][] matrix2) {
-        System.out.println("Matrix division is not supported in this version.");  // Menampilkan pesan bahwa pembagian matriks tidak didukung
-        // You can implement matrix division logic if needed
+    // Melakukan pembagian
+    private void performDivision(int[][] matriks1, int[][] matriks2) {
+        System.out.println("Pembagian matriks tidak didukung dalam versi ini.");
+        // Anda dapat mengimplementasikan logika pembagian matriks jika diperlukan
     }
 
-    // Calculate transpose
-    private void calculateTranspose(int[][] matrix) {
-        resultMatrix = new int[matrix[0].length][matrix.length];  // Membuat matriks hasil transpose
-        for (int i = 0; i < matrix.length; i++) {
-            for (int j = 0; j < matrix[0].length; j++) {
-                resultMatrix[j][i] = matrix[i][j];  // Mengisi elemen-elemen matriks hasil transpose
+    // Menghitung transpose
+    private void calculateTranspose(int[][] matriks) {
+        matrixHasil = new int[matriks[0].length][matriks.length];
+        for (int i = 0; i < matriks.length; i++) {
+            for (int j = 0; j < matriks[0].length; j++) {
+                matrixHasil[j][i] = matriks[i][j];
             }
         }
-        System.out.println("Result of Transpose:");  // Menampilkan hasil transpose matriks
-        printMatrix(resultMatrix);  // Memanggil metode untuk menampilkan matriks
+        System.out.println("Hasil Transpose:");
+        displayMatrix(matrixHasil);
     }
 
-    // Calculate determinant
-    private void calculateDeterminant(int[][] matrix) {
-        if (matrix.length == matrix[0].length) {
-            determinantResult = calculateDeterminantRecursive(matrix);  // Menghitung determinan menggunakan metode rekursif
-            System.out.println("Determinant: " + determinantResult);  // Menampilkan hasil determinan
+    // Menghitung determinan
+    private void calculateDeterminant(int[][] matriks) {
+        if (matriks.length == matriks[0].length) {
+            determinanResult = calculateDeterminantRecursive(matriks);
+            System.out.println("Determinan: " + determinanResult);
         } else {
-            System.out.println("Matrix must be square to calculate determinant.");  // Menampilkan pesan jika matriks tidak persegi
+            System.out.println("Matriks harus berbentuk persegi untuk menghitung determinan.");
         }
     }
 
-    // Recursive method to calculate determinant
-    private double calculateDeterminantRecursive(int[][] matrix) {
-        int n = matrix.length;
-        double determinant = 0;
+    // Metode rekursif untuk menghitung determinan
+    private double calculateDeterminantRecursive(int[][] matriks) {
+        int n = matriks.length;
+        double determinan = 0;
 
         if (n == 1) {
-            determinant = matrix[0][0];  // Basis case: determinan untuk matriks 1x1
+            determinan = matriks[0][0];
         } else if (n == 2) {
-            determinant = (matrix[0][0] * matrix[1][1]) - (matrix[0][1] * matrix[1][0]);  // Basis case: determinan untuk matriks 2x2
+            determinan = (matriks[0][0] * matriks[1][1]) - (matriks[0][1] * matriks[1][0]);
         } else {
             for (int i = 0; i < n; i++) {
-                int[][] submatrix = createSubmatrix(matrix, i);  // Membuat submatriks untuk perhitungan determinan
-                determinant += Math.pow(-1, i) * matrix[0][i] * calculateDeterminantRecursive(submatrix);  // Rekursif: menambahkan determinan submatriks dengan tanda yang sesuai
+                int[][] submatrix = createSubmatrix(matriks, i);
+                determinan += Math.pow(-1, i) * matriks[0][i] * calculateDeterminantRecursive(submatrix);
             }
         }
 
-        return determinant;
+        return determinan;
     }
 
-    // Create submatrix for determinant calculation
-    private int[][] createSubmatrix(int[][] matrix, int col) {
-        int n = matrix.length;
+    // Membuat submatriks untuk perhitungan determinan
+    private int[][] createSubmatrix(int[][] matriks, int col) {
+        int n = matriks.length;
         int[][] submatrix = new int[n - 1][n - 1];
         for (int i = 1; i < n; i++) {
             int subCol = 0;
             for (int j = 0; j < n; j++) {
                 if (j != col) {
-                    submatrix[i - 1][subCol++] = matrix[i][j];  // Mengisi submatriks dengan elemen-elemen yang sesuai
+                    submatrix[i - 1][subCol++] = matriks[i][j];
                 }
             }
         }
         return submatrix;
     }
 
-    // Method to print a matrix
-    private void printMatrix(int[][] matrix) {
-        for (int[] row : matrix) {
+    // Menampilkan matriks
+    private void displayMatrix(int[][] matriks) {
+        for (int[] row : matriks) {
             for (int value : row) {
-                System.out.print(value + " ");  // Menampilkan elemen-elemen matriks
+                System.out.print(value + " ");
             }
             System.out.println();
         }
     }
 
-    // Method to input elements for a matrix
-    private static int[][] inputMatrix(int rows, int cols, String matrixName, Scanner scanner) {
-        int[][] matrix = new int[rows][cols];
-        System.out.println("Enter elements for matrix " + matrixName + ":");  // Meminta pengguna untuk memasukkan elemen-elemen matriks
-        for (int i = 0; i < rows; i++) {
-            for (int j = 0; j < cols; j++) {
-                System.out.print("Enter element at position (" + (i + 1) + "," + (j + 1) + "): ");
-                matrix[i][j] = scanner.nextInt();  // Membaca elemen-elemen matriks dari input pengguna
+    // Metode untuk menginput elemen-elemen matriks
+    private static int[][] inputMatriks(int baris, int kolom, String namaMatriks, Scanner scanner) {
+        int[][] matriks = new int[baris][kolom];
+        System.out.println("Masukkan elemen-elemen matriks " + namaMatriks + ":");
+        for (int i = 0; j < baris; i++) {
+            for (int j = 0; j < kolom; j++) {
+                System.out.print("Masukkan elemen pada posisi (" + (i + 1) + "," + (j + 1) + "): ");
+                matriks[i][j] = scanner.nextInt();
             }
         }
-        return matrix;
+        return matriks;
     }
 
-    // Main method for testing
+    // Metode utama untuk pengujian
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
 
-        // Input for the first matrix
-        System.out.print("Enter the number of rows for the first matrix: ");
-        int rows1 = scanner.nextInt();
-        System.out.print("Enter the number of columns for the first matrix: ");
-        int cols1 = scanner.nextInt();
-        int[][] matrix1 = inputMatrix(rows1, cols1, "first", scanner);
+        // Input untuk matriks pertama
+        System.out.print("Masukkan jumlah baris untuk matriks pertama: ");
+        int baris1 = scanner.nextInt();
+        System.out.print("Masukkan jumlah kolom untuk matriks pertama: ");
+        int kolom1 = scanner.nextInt();
+        int[][] matriks1 = inputMatriks(baris1, kolom1, "pertama", scanner);
 
-        // Input for the second matrix
-        System.out.print("Enter the number of rows for the second matrix: ");
-        int rows2 = scanner.nextInt();
-        System.out.print("Enter the number of columns for the second matrix: ");
-        int cols2 = scanner.nextInt();
-        int[][] matrix2 = inputMatrix(rows2, cols2, "second", scanner);
+        // Input untuk matriks kedua
+        System.out.print("Masukkan jumlah baris untuk matriks kedua: ");
+        int baris2 = scanner.nextInt();
+        System.out.print("Masukkan jumlah kolom untuk matriks kedua: ");
+        int kolom2 = scanner.nextInt();
+        int[][] matriks2 = inputMatriks(baris2, kolom2, "kedua", scanner);
 
-        // Creating a Matrix object with the input matrices
-        new Matrix(matrix1, matrix2);
+        // Membuat objek Matrix dengan matriks yang diinputkan
+        new Matrix(matriks1, matriks2);
 
-        // Creating a Matrix object to calculate the transpose
-        System.out.println("\nCalculating Transpose of the First Matrix:");
-        new Matrix(matrix1);
+        // Membuat objek Matrix untuk menghitung transpose
+        System.out.println("\nMenghitung Transpose Matriks Pertama:");
+        new Matrix(matriks1);
 
-        // Creating a Matrix object to calculate the determinant
-        System.out.println("\nCalculating Determinant of the First Matrix:");
-        new Matrix(matrix1, true);
+        // Membuat objek Matrix untuk menghitung determinan
+        System.out.println("\nMenghitung Determinan Matriks Pertama:");
+        new Matrix(matriks1, true);
 
-        scanner.close();  // Menutup objek Scanner
+        scanner.close();
     }
 }
