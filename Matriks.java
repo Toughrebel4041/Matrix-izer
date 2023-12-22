@@ -97,7 +97,7 @@ public class Matriks {
 
     // Perform division
     private void performDivision(int[][] matrix1, int[][] matrix2) {
-        System.out.println("Matrix division is not supported in this version.");
+        System.out.println("Sorry, there is no thing called Matrix Division.");
         // You can implement matrix division logic if needed
     }
 
