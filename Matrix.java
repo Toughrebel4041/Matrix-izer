@@ -116,7 +116,7 @@ public class Matrix {
 
     // Melakukan pembagian
     private void performDivision(int[][] matriks1, int[][] matriks2) {
-        System.out.println("Pembagian matriks tidak didukung dalam versi ini.");
+        System.out.println("Tidak ada methode pembagian untuk matriks.");
         // Anda dapat mengimplementasikan logika pembagian matriks jika diperlukan
     }
 
